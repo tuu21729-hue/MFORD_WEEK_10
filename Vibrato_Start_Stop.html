@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8">
+    <title> Start Stop Fun</title>
+    </head>
+    <body>
+        <button id = "Start1">Start1</button>
+        <button id = "Stop1">Stop1</button>
+
+         <script>
+
+
+const ctx = new AudioContext();
+
+let osc1, VibMod
+
+document.queryselector("#Start1").onclick = () =>
+
+{
+
+
+
+osc1 = new OscillatorNode(ctx);
+osc1.frequency.value = 110;
+oscillator.type = "sawtooth";
+
+const osc1Gain = new GainNode(ctx);
+osc1Gain.gain.value = 0.1;
+
+osc1.connect(osc1Gain);
+osc1Gain.connect(ctx.destination);
+
+VibMod = new OscillatorNode(ctx);
+VibMod.frequency.value = 2;
+
+const VibMobGain = new GainNode(ctx);
+VibModGain.gain.value = 200; // right now, the oscillator will "wobble" by 100 Hz
+
+
+VibMod.connect(VibModGain);
+VibModGain.connect(osc1.frequency); // try switching to oscillator.detune
+
+osc1.start();
+VibMod.start();
+
+}
+
+document.querySelector("#Stop1").onclick = () =>
+
+{
+
+osc1.stop();
+VibMod.stop();
+
+}
+
+
+</script>
+
+</body>
+
+</html>
